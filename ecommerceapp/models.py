@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+ 
 
 class Contact(models.Model):
     name = models.CharField(max_length=50)
@@ -20,4 +22,20 @@ class Products(models.Model):
 
     def __int__(self):
         return self.id
+    
+
+
+class Cart(models.Model):
+    """Cart model represents a user's cart in the e-commerce store."""
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  
+    product = models.ForeignKey(Products, on_delete=models.CASCADE)   
+    quantity = models.PositiveIntegerField(default=1)  
+    added_at = models.DateTimeField(auto_now_add=True)  
+
+    def __str__(self):
+        return f"{self.product.product_name} - {self.quantity}"
+
+    def get_total_price(self):
+        """Calculates the total price for a product based on quantity."""
+        return self.quantity * self.product.price
     

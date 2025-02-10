@@ -59,15 +59,16 @@
           <li><a href="blog.html">Blog</a></li>
           <li>
             <a tabindex="0" class="btn btn-lg btn-danger d-flex align-items-center px-4 py-2 rounded-pill" 
-               href="#" 
                data-bs-toggle="popover" 
                data-bs-trigger="click" 
+               id="cart-popover" 
                title="Shopping Cart" 
-               data-bs-content="You have 3 items in your cart.">
-              <i class="bi bi-cart-fill me-2"></i> <!-- Cart Icon with margin-right -->
-              Cart
+               data-bs-content="You have 0 items in your cart.">  <!-- Initial count can be 0 -->
+                <i class="bi bi-cart-fill me-2"></i> <!-- Cart Icon with margin-right -->
+                Cart
             </a>
-          </li>
+        </li>
+        
           {% if request.user.is_authenticated %}
                
               <li><a href="/auth/logout/">Log-Out</a></li>
@@ -182,13 +183,43 @@
   <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
   <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"> </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <script>
     // Enable Bootstrap popover functionality
     var popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
     var popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
   </script>
+   
 
+  
+  <script>
+      $(document).ready(function () {
+          // Initialize the popover
+          var popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+          var popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+  
+          // Add to Cart button event listener
+          $('.btn-primary').click(function(e) {
+              e.preventDefault();
+              
+              var productId = $(this).data('product-id');
+              
+              // Make Ajax request to add the product to the cart
+              $.ajax({
+                  url: '{% url "add_to_cart" 0 %}'.replace('0', productId),
+                  method: 'POST',
+                  data: {
+                      'csrfmiddlewaretoken': '{{ csrf_token }}',
+                  },
+                  success: function(response) {
+                      // Update the cart popover content with the new cart count
+                      $('#cart-popover').attr('data-bs-content', 'You have ' + response.cart_count + ' items in your cart.');
+                  }
+              });
+          });
+      });
+  </script>
   
 
   <!-- Main JS File -->

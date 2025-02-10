@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpRequest
-from ecommerceapp.models import Contact,Products
+from ecommerceapp.models import Contact,Products,Cart
+from django.http import JsonResponse
 from django.contrib import messages
 
 def index(req:HttpRequest):
@@ -23,6 +24,35 @@ def contact_us(req:HttpRequest):
 
      
     return render(req,"pages/contact_us.html",{"contact_error_message":"We will contact soon!"})
+
+
+
+def add_to_cart(request, product_id):
+    """Adds a product to the cart and returns the updated cart item count."""
+    # if not request.user.is_authenticated:
+    #     return JsonResponse({'error': 'User not authenticated'}, status=400)
+
+    product = Products.objects.get(id=product_id)
+    user = request.user
+    cart_item, created = Cart.objects.get_or_create(user=user, product=product)
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+    cart_count = Cart.objects.filter(user=user).count()
+    return JsonResponse({'cart_count': cart_count})
+
+
+
+def get_cart_count(request):
+    """Get the current cart count for the logged-in user."""
+    # if not request.user.is_authenticated:
+    #     return JsonResponse({'cart_count': 0})  
+
+    user = request.user
+    cart_count = Cart.objects.filter(user=user).count()
+    return JsonResponse({'cart_count': cart_count})
+
+
 
 
 def checkout(req:HttpRequest):

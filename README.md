@@ -38,10 +38,11 @@ This is a fully functional e-commerce web application built using **Django**. Th
 
 Follow the steps below to set up the project locally.
 
-### 1. Clone the repository
+### 1. Clone the repository and run given cmd
 
 ```bash
 git clone https://github.com/yourusername/ecommerce-project.git
+ 
 
 <h1> venv\Scripts\activate for windows </h1>
 <h2>source venv/bin/activate for linux </h2>
