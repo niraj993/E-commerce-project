@@ -1,0 +1,57 @@
+
+
+
+
+ {% extends "./baseauth.html"%}
+
+ {% block title %} - Sign-In {% endblock title %}
+ 
+ {% block bodyforms %}
+ <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+     <div class="card p-3 shadow-sm" style="max-width: 400px; width: 100%; border-radius: 10px;">
+         <h3 class="text-center text-black mb-4">Sign In</h3>
+ 
+         <!-- Sign-In Form -->
+         <form action="/auth/signin/" method="POST">
+             {% csrf_token %}
+ 
+             {% if login_error_mess %}
+             <div class="alert alert-danger" role="alert" id="login_error_mess">
+                 {{ login_error_mess }}
+             </div>
+             <script>
+                 setTimeout(function() {
+                     var alertElement = document.getElementById('login_error_mess');
+                     if (alertElement) {
+                         alertElement.style.display = 'none';
+                     }
+                 }, 3000);
+             </script>
+             {% endif %}
+ 
+             <!-- Email Input -->
+             <div class="form-group mb-3">
+                 <label for="email" class="form-label text-start">Email address</label>
+                 <input type="email" class="form-control form-control-sm" id="email" name="useremail" placeholder="Enter your email" required>
+             </div>
+ 
+             <!-- Password Input -->
+             <div class="form-group mb-3">
+                 <label for="password" class="form-label text-start">Password</label>
+                 <input type="password" class="form-control form-control-sm" id="password" name="userpassword" placeholder="Enter your password" required>
+             </div>
+ 
+             <!-- Submit Button -->
+             <button type="submit" class="btn btn-primary btn-sm w-100">Sign In</button>
+         </form>
+ 
+         <!-- Link to Sign Up -->
+         <div class="text-center mt-3">
+             <p class="small text-black" style="font-size: 16px; text-align: center;">Don't have an account? 
+                 <a href="{% url 'signup' %}" class="text-primary btn-dark">Sign Up</a>
+             </p>
+         </div>
+     </div>
+ </div>
+ {% endblock bodyforms %}
+ 

@@ -1,0 +1,91 @@
+{% extends "./baseauth.html"%}
+
+
+{% block title %}
+    - Sign-Up
+{% endblock title %}
+
+{% block bodyforms %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card p-3 shadow-sm" style="max-width: 400px; width: 100%; border-radius: 10px;">
+        <h3 class="text-center text-black  mb-4">Create an Account</h3>
+
+        <!-- Signup Form -->
+        {% if messages %}
+        <div class="alert-container mb-3">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        <script>
+            setTimeout(function() {
+                 
+                const alerts = document.querySelectorAll('.alert');
+                alerts.forEach(function(alert) {
+                    alert.style.display = 'none';  
+                });
+            }, 3000);   
+            setTimeout(function() {
+                window.location.href = '/auth/signin/';   
+            }, 4000); 
+        </script>
+        {% endif %}
+        <form action="/auth/signup/" method="POST">
+            {% csrf_token %}
+
+            <!-- Username Input -->
+            {% if error_message %}
+            <div class="alert alert-danger" role="alert" id="error-message">
+              {{ error_message }}
+            </div>
+            <script>
+                 
+                setTimeout(function() {
+                  var alertElement = document.getElementById('error-message');
+                  if (alertElement) {
+                    alertElement.style.display = 'none';
+                  }
+                }, 3000);  
+               
+              </script>
+            {% endif %}
+            <div class="form-group mb-3">
+                <label for="username" class="form-label text-start">Username</label>
+                <input type="text" class="form-control form-control-sm" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+
+            <!-- Email Input -->
+            <div class="form-group mb-3">
+                <label for="email" class="form-label text-start">Email address</label>
+                <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <!-- Password Input -->
+            <div class="form-group mb-3">
+                <label for="password" class="form-label text-start">Password</label>
+                <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <!-- Confirm Password Input -->
+            <div class="form-group mb-3">
+                <label for="confirm_password" class="form-label text-start">Confirm Password</label>
+                <input type="password" class="form-control form-control-sm" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-sm w-100">Sign Up</button>
+        </form>
+
+        <!-- Link to Sign In -->
+        <div class="text-center mt-3">
+            <p class="small text-black" style="font-size: 16px; text-align: center;">Already have an account? 
+                <a href="{% url 'signin' %}" class="text-primary btn-dark">Sign in</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock bodyforms %}

@@ -1,0 +1,62 @@
+{% extends "pages/base.html"%}
+
+{% block title  %} -Contact-Us {% endblock title%}
+
+
+{% block body %} 
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card p-3 shadow-sm" style="max-width: 400px; width: 100%; border-radius: 10px;">
+        <h3 class="text-center text-black  mb-4">Conatct-Us</h3>
+
+        <!-- Signup Form -->
+        
+        <form action="/contact-us/" method="POST">
+            {% csrf_token %}
+
+            <!-- Username Input -->
+            {% if contact_error_message %}
+            <div class="alert alert-danger" role="alert" id="contact_error_message">
+              {{ contact_error_message }}
+            </div>
+            <script>
+                 
+                setTimeout(function() {
+                  var alertElement = document.getElementById('contact_error_message');
+                  if (alertElement) {
+                    alertElement.style.display = 'none';
+                  }
+                }, 3000);  
+               
+              </script>
+            {% endif %}
+            <div class="form-group mb-3">
+                <label for="username" class="form-label text-start">Username</label>
+                <input type="text" class="form-control form-control-sm" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+
+            <!-- Email Input -->
+            <div class="form-group mb-3">
+                <label for="email" class="form-label text-start">Email address</label>
+                <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <!-- Password Input -->
+            <div class="form-group mb-3">
+                <label for="description" class="form-label text-start">Description</label>
+                <input type="text" class="form-control form-control-sm" id="description" name="description" placeholder="Enter your description" required>
+            </div>
+
+            <!-- Confirm Password Input -->
+            <div class="form-group mb-3">
+                <label for="phone_number" class="form-label text-start">Contact-No</label>
+                <input type="number" class="form-control form-control-sm" id="phone_number" name="phone_number" placeholder="Conatct-No your phone_number" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-sm w-100">Submit</button>
+        </form>
+
+        
+    </div>
+</div>
+{% endblock body %}

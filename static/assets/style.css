@@ -1,0 +1,136 @@
+/* General Body Styling */
+body {
+    background-color: #f8f9fa; /* Light gray background */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for the grid layout */
+.container {
+    padding: 40px 15px;
+}
+
+/* Row styling for portfolio items */
+.row {
+    margin: 0;
+}
+
+/* Portfolio item card styling */
+.portfolio-item {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Card styling */
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    /* Adjust card size */
+    max-width: 250px; /* Adjust the max-width of the card */
+    margin: 0 auto; /* Center align */
+}
+
+/* Card hover effect */
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Product Image Styling */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Card Body Styling */
+.card-body {
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 250px; /* Set a fixed height to make the cards look uniform */
+}
+
+/* Product Title Styling */
+.card-title {
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Product Description Styling */
+.card-text {
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+}
+
+/* Price Styling */
+.price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #28a745; /* Green color for price */
+    margin: 10px 0;
+}
+
+/* Button Styling */
+.btn-add-to-cart, .btn-view-product {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Full width buttons */
+    margin-top: 10px;
+}
+
+/* Hover Effects for Buttons */
+.btn-add-to-cart:hover, .btn-view-product:hover {
+    background-color: #0056b3;
+}
+
+/* No Products Found Styling */
+.no-products {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #777;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+    .col-lg-3 {
+        flex: 0 0 25%; /* 4 products per row on large screens */
+        max-width: 25%;
+    }
+}
+
+@media (max-width: 992px) {
+    .col-md-4 {
+        flex: 0 0 33.33%; /* 3 products per row on medium screens */
+        max-width: 33.33%;
+    }
+}
+
+@media (max-width: 768px) {
+    .col-sm-6 {
+        flex: 0 0 50%; /* 2 products per row on small screens */
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 576px) {
+    .col-sm-6 {
+        flex: 0 0 100%; /* 1 product per row on very small screens */
+        max-width: 100%;
+    }
+}
