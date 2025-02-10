@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path 
 from configs.email_cred import EMAIL_HOST_PASSWORD,EMAIL_HOST_USER
+from configs.db_cred import DB_NAME,DB_USER_NAME,DB_HOST,DB_PASSWORD,DB_PORT
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -101,11 +102,11 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'website',   
-        'USER': 'root',  
-        'PASSWORD': 'root',  
-        'HOST': 'localhost',  
-        'PORT': '3306',   
+        'NAME': DB_NAME,   
+        'USER': DB_USER_NAME,  
+        'PASSWORD': DB_PASSWORD,  
+        'HOST': DB_HOST,  
+        'PORT': DB_PORT,   
     }
 }
 
