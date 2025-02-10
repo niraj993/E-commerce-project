@@ -24,6 +24,10 @@ def contact_us(req:HttpRequest):
      
     return render(req,"pages/contact_us.html",{"contact_error_message":"We will contact soon!"})
 
+
+def checkout(req:HttpRequest):
+    return render(req,"pages/checkout.html")
+
 def about_us(req:HttpRequest):
     return render(req,'pages/about_us.html')
 

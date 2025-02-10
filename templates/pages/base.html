@@ -30,6 +30,9 @@
   <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
   <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
   <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  
+<!-- Bootstrap JS Bundle (includes Popper) -->
+
 
   <!-- Main CSS -->
   <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
@@ -52,14 +55,24 @@
           <li><a href="/about-us">About</a></li>
           <li><a href="/contact-us">Orders</a></li>
           <li><a href="/contact-us">Profile</a></li>
+          <li><a href="/checkout">Checkout</a></li>
           <li><a href="blog.html">Blog</a></li>
-          <p>Debug: {{ request.user }}</p>
- 
+          <li>
+            <a tabindex="0" class="btn btn-lg btn-danger d-flex align-items-center px-4 py-2 rounded-pill" 
+               href="#" 
+               data-bs-toggle="popover" 
+               data-bs-trigger="click" 
+               title="Shopping Cart" 
+               data-bs-content="You have 3 items in your cart.">
+              <i class="bi bi-cart-fill me-2"></i> <!-- Cart Icon with margin-right -->
+              Cart
+            </a>
+          </li>
           {% if request.user.is_authenticated %}
-              <p>You are logged in as {{ request.user.username }}.</p>
+               
               <li><a href="/auth/logout/">Log-Out</a></li>
           {% else %}
-              <p>You are not logged in.</p>
+              
               <li class="dropdown">
                   <a href="#">
                       <span>Dropdown</span>
@@ -73,7 +86,7 @@
           {% endif %}
 
           <li><a href="/contact-us" class="bg-success p-3 m-3">Contact</a></li>
-          <li><a href="/contact-us" class="bg-danger p-3">Card</a></li>
+         
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -168,6 +181,15 @@
   <script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
   <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
   <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"> </script>
+
+  <script>
+    // Enable Bootstrap popover functionality
+    var popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+    var popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+  </script>
+
+  
 
   <!-- Main JS File -->
   <script src="{% static 'assets/js/main.js' %}"></script>
